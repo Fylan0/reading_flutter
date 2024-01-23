@@ -1,4 +1,14 @@
 # Reading APP Flutter版
+
+
+
+
+------------------------------
+//开发过程记录
+
+1、 使用 ：go_router、adaptive_navigation 搭建主页
+![go_router、adaptive_navigation 搭建主页](/read_file/screen_1.png)
+
 ------------------------------
 # reading_flutter
 
