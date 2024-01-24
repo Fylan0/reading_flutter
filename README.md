@@ -9,6 +9,11 @@
 1、 使用 ：go_router、adaptive_navigation 搭建主页
 ![go_router、adaptive_navigation 搭建主页](/read_file/screen_1.png)
 
+
+2、书店：书籍列表异步加载逻辑、GridView网格布局
+![书店：书籍列表异步加载逻辑、GridView网格布局](/read_file/feature_gridview.png)
+
+
 ------------------------------
 # reading_flutter
 
