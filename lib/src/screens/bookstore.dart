@@ -69,7 +69,8 @@ class _BookstoreState extends State<BookstoreScreen> {
                     crossAxisCount: 3, // 一行显示的数量
                     crossAxisSpacing: 8.0, // 横轴方向上的间距
                     mainAxisSpacing: 8.0, // 纵轴方向上的间距
-                    childAspectRatio: 0.8, // 设置纵横比例，根据实际需求调整
+                    // childAspectRatio: 0.8, // 设置纵横比例，根据实际需求调整
+                    mainAxisExtent: 230,
                   ),
                   itemBuilder: (BuildContext context, int index) {
                     return GridItem(index: index, bookEntity: bookList[index]);
@@ -101,9 +102,10 @@ class GridItem extends StatelessWidget {
               child: ClipRRect(
                   // borderRadius: const BorderRadius.all(Radius.circular(2)),
                   borderRadius:
-                      BorderRadius.vertical(top: Radius.circular(16.0)),
+                      const BorderRadius.vertical(top: Radius.circular(16.0)),
                   child: Image.network(
                     bookEntity.bookCover,
+                    height: 160,
                     fit: BoxFit.cover,
                     loadingBuilder: (BuildContext context, Widget child,
                         ImageChunkEvent? loadingProgress) {
@@ -119,13 +121,14 @@ class GridItem extends StatelessWidget {
                         StackTrace? stackTrace) {
                       // 加载失败时显示兜底图
                       return Image.asset('assets/placeholder_image.png',
-                          fit: BoxFit.cover);
+                          height: 160, fit: BoxFit.cover);
                     },
                   ))),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
               bookEntity.bookName,
+              maxLines: 2,
               style: const TextStyle(fontSize: 16.0),
             ),
           ),
