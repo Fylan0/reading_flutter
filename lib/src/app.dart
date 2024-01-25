@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:reading_flutter/src/screens/bookshelf.dart';
 import 'package:reading_flutter/src/screens/bookstore.dart';
+import 'package:reading_flutter/src/screens/test.dart';
 
 /// 主页
 
@@ -28,6 +29,7 @@ class ReadingState extends State<Reading> {
                 selectedIndex: switch (state.uri.path) {
                   var p when p.startsWith(bookstoreRouter) => 0,
                   var p when p.startsWith(bookshelfRouter) => 1,
+                  var p when p.startsWith(testRouter) => 2,
                   _ => 0
                 },
                 child: child,
@@ -43,6 +45,11 @@ class ReadingState extends State<Reading> {
                   path: bookshelfRouter,
                   pageBuilder: (context, child) {
                     return const MaterialPage(child: BookshelfScreen());
+                  }),
+              GoRoute(
+                  path: testRouter,
+                  pageBuilder: (context, child) {
+                    return const MaterialPage(child: TestScreen());
                   }),
             ],
           )
@@ -71,11 +78,15 @@ class HomePage extends StatelessWidget {
             goRouter.go(bookstoreRouter);
           } else if (idx == 1) {
             goRouter.go(bookshelfRouter);
+          } else if (idx == 2) {
+            goRouter.go(testRouter);
           }
         },
         destinations: const [
           AdaptiveScaffoldDestination(title: "书店", icon: Icons.book),
           AdaptiveScaffoldDestination(title: "书架", icon: Icons.mark_chat_read),
+          AdaptiveScaffoldDestination(
+              title: "Test", icon: Icons.mark_chat_read),
         ],
       ),
     );
