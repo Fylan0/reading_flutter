@@ -81,59 +81,71 @@ class _BookstoreState extends State<BookstoreScreen> {
   }
 }
 
+typedef Callback = void Function(BookEntity);
+
 class GridItem extends StatelessWidget {
   final int index;
   final BookEntity bookEntity;
+  final Callback? callback;
 
-  const GridItem({super.key, required this.index, required this.bookEntity});
+  const GridItem({
+    super.key,
+    required this.index,
+    required this.bookEntity,
+    this.callback,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 4.0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8.0), // 卡片圆角
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        // mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(
-              child: ClipRRect(
-                  // borderRadius: const BorderRadius.all(Radius.circular(2)),
-                  borderRadius:
-                      const BorderRadius.vertical(top: Radius.circular(16.0)),
-                  child: Image.network(
-                    bookEntity.bookCover,
-                    height: 160,
-                    fit: BoxFit.cover,
-                    loadingBuilder: (BuildContext context, Widget child,
-                        ImageChunkEvent? loadingProgress) {
-                      if (loadingProgress == null) {
-                        return child;
-                      } else {
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      }
-                    },
-                    errorBuilder: (BuildContext context, Object error,
-                        StackTrace? stackTrace) {
-                      // 加载失败时显示兜底图
-                      return Image.asset('assets/placeholder_image.png',
-                          height: 160, fit: BoxFit.cover);
-                    },
-                  ))),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              bookEntity.bookName,
-              maxLines: 2,
-              style: const TextStyle(fontSize: 16.0),
-            ),
+    return GestureDetector(
+        onTap: () {
+          callback!(bookEntity);
+        },
+        child: Card(
+          elevation: 4.0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8.0), // 卡片圆角
           ),
-        ],
-      ),
-    );
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            // mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                  child: ClipRRect(
+                      // borderRadius: const BorderRadius.all(Radius.circular(2)),
+                      borderRadius: const BorderRadius.vertical(
+                          top: Radius.circular(16.0)),
+                      child: Image.network(
+                        bookEntity.bookCover,
+                        height: 160,
+                        fit: BoxFit.cover,
+                        loadingBuilder: (BuildContext context, Widget child,
+                            ImageChunkEvent? loadingProgress) {
+                          if (loadingProgress == null) {
+                            return child;
+                          } else {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
+                        },
+                        errorBuilder: (BuildContext context, Object error,
+                            StackTrace? stackTrace) {
+                          // 加载失败时显示兜底图
+                          return Image.asset('assets/placeholder_image.png',
+                              height: 160, fit: BoxFit.cover);
+                        },
+                      ))),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  bookEntity.bookName,
+                  maxLines: 2,
+                  style: const TextStyle(fontSize: 16.0),
+                ),
+              ),
+            ],
+          ),
+        ));
   }
 }
