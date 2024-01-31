@@ -5,11 +5,11 @@ import '../db/databaseHelper.dart';
 ///书籍实体类
 class BookEntity {
   final String bookId;
-  final String bookName;
-  final String bookContent;
-  final String bookAuthor;
-  final String bookShortIntro;
-  final String bookCover;
+  String bookName;
+  String bookContent;
+  String bookAuthor;
+  String bookShortIntro;
+  String bookCover;
 
   BookEntity({
     String? bookId,

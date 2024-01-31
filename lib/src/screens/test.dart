@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:reading_flutter/src/db/dao/bookChapterDao.dart';
 
-import '../data/BookEntity.dart';
+import '../data/bookEntity.dart';
 import '../db/dao/bookDap.dart';
 
 /// 测试页面
@@ -34,6 +35,7 @@ class TestState extends State<TestScreen> {
             TextButton(
               onPressed: () {
                 print('Second Button Pressed');
+                testDb2();
               },
               child: Text('Second Button'),
             ),
@@ -58,4 +60,11 @@ Future<void> testDb() async {
   // 查询所有数据
   var book = await bookDao.getAll();
   print("book table data:$book");
+}
+
+Future<void> testDb2() async {
+  var bookChapterDao = BookChapterDao();
+  // 查询所有数据
+  var bookChapter = await bookChapterDao.getAll();
+  print("bookChapter table data:$bookChapter");
 }

@@ -1,4 +1,4 @@
-package com.example.reading_flutter
+package com.fylan.reading_flutter
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -52,7 +52,9 @@ class DatabaseHelper {
       version: 1,
       onCreate: (Database db, int version) async {
         // 创建表的逻辑
-        await db.execute('''
+
+        var sqlScript = [
+          '''
           CREATE TABLE $tbBookName (
             $tbColumnBookId TEXT PRIMARY KEY,
             $tbColumnBookName TEXT,
@@ -60,7 +62,9 @@ class DatabaseHelper {
             $tbColumnBookAuthor TEXT,
             $tbColumnBookShortIntro TEXT,
             $tbColumnBookCover TEXT
-          );
+          )
+       ''',
+          '''
           CREATE TABLE $tbBookChapterName (
             serial INTEGER PRIMARY KEY AUTOINCREMENT,
             $tbColumnBookId TEXT,
@@ -68,7 +72,9 @@ class DatabaseHelper {
             $tbColumnChapterContent TEXT,
             $tbColumnChapterNumber INTEGER
           )
-        ''');
+       ''',
+        ];
+        sqlScript.forEach((sql) async => await db.execute(sql));
       },
     );
   }

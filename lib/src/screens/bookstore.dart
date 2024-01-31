@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 
-import '../data/BookEntity.dart';
+import '../data/bookEntity.dart';
 
 /// 书店页面
 

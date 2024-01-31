@@ -1,5 +1,6 @@
 import 'package:sqflite/sqflite.dart';
-import '../../data/BookChapter.dart';
+
+import '../../data/bookChapter.dart';
 import '../databaseHelper.dart';
 
 class BookChapterDao {
@@ -10,6 +11,16 @@ class BookChapterDao {
     return await db.insert(tbBookChapterName, book.toMap());
   }
 
+  Future<void> insertAll(List<BookChapter> chapters) async {
+    Database db = await dbHelper.database;
+    Batch batch = db.batch();
+    for (BookChapter bookChapter in chapters) {
+      batch.insert(tbBookChapterName, bookChapter.toMap());
+    }
+    // 提交批处理操作
+    List<dynamic> results = await batch.commit();
+  }
+
   Future<List<BookChapter>> getAll() async {
     Database db = await dbHelper.database;
     List<Map<String, dynamic>> maps = await db.query(tbBookChapterName);
@@ -18,5 +29,5 @@ class BookChapterDao {
     });
   }
 
-  // 其他数据库操作方法...
+// 其他数据库操作方法...
 }

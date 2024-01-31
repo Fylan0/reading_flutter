@@ -1,6 +1,14 @@
-import 'package:flutter/material.dart';
+import 'dart:io';
 
-import '../data/BookEntity.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:reading_flutter/src/db/dao/bookChapterDao.dart';
+import 'package:reading_flutter/src/utils/LocalPageLoaderUtil.dart';
+
+import '../data/bookChapter.dart';
+import '../data/bookEntity.dart';
+import '../db/dao/bookDap.dart';
 import 'bookstore.dart';
 
 /// 书架页面
@@ -32,6 +40,43 @@ class BookshelfScreen extends StatefulWidget {
 class _BookshelfState extends State<BookshelfScreen> {
   late Future<List<BookEntity>> _bookListFuture;
 
+  String? _filePath;
+
+  Future<void> _pickFile() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['txt'],
+    );
+
+    if (result != null) {
+      setState(() {
+        //选择文件完成
+        _filePath = result.files.single.path;
+        print('已选文件：$_filePath');
+        _handleFilePick();
+      });
+    }
+  }
+
+  void _handleFilePick() async {
+    BookEntity book = BookEntity();
+    book.bookName = _filePath!;
+    book.bookAuthor = "author";
+    book.bookShortIntro = "intro";
+
+    var bookDao = BookDao();
+    bookDao.insert(book);
+
+    File file = File(_filePath!);
+    List<BookChapter> bookChapters =
+        (await loadChapters(file, book.bookId)).cast<BookChapter>();
+    print('章节数：：${bookChapters.length}');
+    var bookChapterDao = BookChapterDao();
+    bookChapterDao.insertAll(bookChapters);
+
+    Fluttertoast.showToast(msg: "添加成功");
+  }
+
   @override
   void initState() {
     super.initState();
@@ -42,7 +87,16 @@ class _BookshelfState extends State<BookshelfScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Text("书架")),
+        appBar: AppBar(title: const Text("书架"), actions: [
+          // 添加右侧的图标按钮
+          IconButton(
+            icon: const Icon(Icons.add),
+            onPressed: () {
+              // 添加本地书籍
+              _pickFile();
+            },
+          ),
+        ]),
         body: FutureBuilder(
             future: _bookListFuture,
             builder: (context, AsyncSnapshot<List<BookEntity>> snapshot) {

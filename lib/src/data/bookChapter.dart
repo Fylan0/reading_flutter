@@ -4,11 +4,11 @@ import '../db/databaseHelper.dart';
 class BookChapter {
   final String bookId;
 
-  final String chapterName;
+  String chapterName;
 
   final int chapterNumber;
 
-  final String chapterContent;
+  String chapterContent;
 
   BookChapter(
       {required this.bookId,
@@ -32,5 +32,13 @@ class BookChapter {
       chapterNumber: map[tbColumnChapterNumber],
       chapterContent: map[tbColumnChapterContent],
     );
+  }
+
+  @override
+  String toString() {
+    return 'BookChapter{bookId: $bookId, '
+        'chapterName: $chapterName, '
+        'chapterNumber: $chapterNumber, '
+        'chapterContent: $chapterContent}';
   }
 }
