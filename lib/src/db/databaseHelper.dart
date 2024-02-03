@@ -7,7 +7,7 @@ const tbBookName = "tb_book";
 const tbBookChapterName = "tb_book_chapter";
 
 ///表字段
-const tbColumnBookId = "tb_book";
+const tbColumnBookId = "book_id";
 //书籍名称
 const tbColumnBookName = "book_name";
 //书籍内容（预留字段，暂时为空）

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:reading_flutter/src/screens/bookshelf.dart';
 import 'package:reading_flutter/src/screens/bookstore.dart';
+import 'package:reading_flutter/src/screens/reading.dart';
 import 'package:reading_flutter/src/screens/test.dart';
 
 /// 主页
@@ -52,7 +53,13 @@ class ReadingState extends State<Reading> {
                     return const MaterialPage(child: TestScreen());
                   }),
             ],
-          )
+          ),
+          GoRoute(
+              path: '$readingRouter/:$paramsBookId',
+              pageBuilder: (context, state) {
+                String bookId = state.pathParameters[paramsBookId]!;
+                return MaterialPage(child: ReadingScreen(bookId: bookId));
+              }),
         ],
       ),
     );

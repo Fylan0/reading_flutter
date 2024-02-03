@@ -3,8 +3,10 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:go_router/go_router.dart';
 import 'package:path/path.dart';
 import 'package:reading_flutter/src/db/dao/bookChapterDao.dart';
+import 'package:reading_flutter/src/screens/reading.dart';
 import 'package:reading_flutter/src/utils/LocalPageLoaderUtil.dart';
 
 import '../data/bookChapter.dart';
@@ -17,7 +19,6 @@ import 'bookstore.dart';
 const bookshelfRouter = "/bookshelf";
 
 class BookshelfScreen extends StatefulWidget {
-
   const BookshelfScreen({super.key});
 
   @override
@@ -27,7 +28,6 @@ class BookshelfScreen extends StatefulWidget {
 }
 
 class _BookshelfState extends State<BookshelfScreen> {
-
   BookDao bookDao = BookDao();
 
   String? _filePath;
@@ -107,7 +107,11 @@ class _BookshelfState extends State<BookshelfScreen> {
                       List<BookEntity> bookList = snapshot.data!;
                       //设置点击事件
                       click(book) {
-                        print('Grid item clicked ${book.toString()}');
+                        if (book is BookEntity) {
+                          GoRouter.of(context)
+                              .go('$readingRouter/${book.bookId}');
+                          print('Grid item clicked ${book.toString()}');
+                        }
                       }
 
                       //!!!！！！！GridView  真难用！！！！

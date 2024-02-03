@@ -29,5 +29,14 @@ class BookChapterDao {
     });
   }
 
+  Future<List<BookChapter>> getBookChapter(String bookId) async {
+    Database db = await dbHelper.database;
+    List<Map<String, dynamic>> maps = await db.query(tbBookChapterName,
+        where: '$tbColumnBookId = ?', whereArgs: [bookId]);
+    return List.generate(maps.length, (i) {
+      return BookChapter.fromMap(maps[i]);
+    });
+  }
+
 // 其他数据库操作方法...
 }
