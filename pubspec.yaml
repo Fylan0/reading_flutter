@@ -38,6 +38,18 @@ dependencies:
   file_picker: ^6.1.1
   fluttertoast: ^8.2.4
 
+  #网络请求
+  http: ^1.2.0
+  cronet_http: ^1.0.0
+  cupertino_http: ^1.2.0
+  fetch_client: ^1.0.2
+
+  provider: ^6.1.1
+
+  #json转换
+  freezed_annotation: ^2.1.0
+  json_annotation: ^4.8.1
+
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
@@ -46,6 +58,9 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  build_runner: ^2.2.1
+  freezed: ^2.1.1
+  json_serializable: ^6.4.0
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your

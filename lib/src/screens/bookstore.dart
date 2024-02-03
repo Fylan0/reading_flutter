@@ -1,6 +1,10 @@
 // ignore_for_file: no_logic_in_create_state
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
+import 'package:provider/provider.dart';
 
 import '../data/bookEntity.dart';
 
@@ -9,6 +13,8 @@ import '../data/bookEntity.dart';
 const bookstoreRouter = "/bookstore";
 
 class BookstoreScreen extends StatefulWidget {
+
+  //测试方法
   Future<List<BookEntity>> fetchBookList() async {
     // 在这里实现异步逻辑，例如从网络请求数据
     // ...
@@ -39,11 +45,14 @@ class BookstoreScreen extends StatefulWidget {
 class _BookstoreState extends State<BookstoreScreen> {
   late Future<List<BookEntity>> _bookListFuture;
 
+  late Client _client;
+
   @override
   void initState() {
     super.initState();
     // 在 initState 中触发异步加载
-    _bookListFuture = widget.fetchBookList();
+    // _bookListFuture = widget.fetchBookList();
+    _client = context.read<Client>();
   }
 
   @override
@@ -51,7 +60,8 @@ class _BookstoreState extends State<BookstoreScreen> {
     return Scaffold(
         appBar: AppBar(title: const Text("书店")),
         body: FutureBuilder(
-            future: _bookListFuture,
+            // future: _bookListFuture,
+            future: _getBooks(),
             builder: (context, AsyncSnapshot<List<BookEntity>> snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(
@@ -78,6 +88,26 @@ class _BookstoreState extends State<BookstoreScreen> {
                 );
               }
             }));
+  }
+
+  // Get the list of books matching `query`.
+  // The `get` call will automatically use the `client` configurated in `main`.
+  Future<List<BookEntity>> _getBooks() async {
+    final response = await _client.get(
+      Uri.http(
+        'localhost:8081',
+        '/book',
+        // {'q': "", 'maxResults': '20', 'printType': 'books'},
+      ),
+    );
+
+    final json = jsonDecode(utf8.decode(response.bodyBytes)) as List<dynamic>;
+
+    final List<BookEntity> bookList = json
+        .map((item) => BookEntity.fromJson(item as Map<String, dynamic>))
+        .toList();
+
+    return bookList;
   }
 }
 

@@ -1,8 +1,11 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:uuid/uuid.dart';
-
 import '../db/databaseHelper.dart';
 
+part 'bookEntity.g.dart';
+
 ///书籍实体类
+@JsonSerializable()
 class BookEntity {
   final String bookId;
   String bookName;
@@ -41,6 +44,11 @@ class BookEntity {
       bookCover: map[tbColumnBookCover],
     );
   }
+
+  factory BookEntity.fromJson(Map<String, dynamic> json) =>
+      _$BookEntityFromJson(json);
+
+  Map<String, dynamic> toJson() => _$BookEntityToJson(this);
 
   @override
   String toString() {
