@@ -47,7 +47,10 @@ APP书店页面截图：
 ![screen_bookstore_net.png](/read_file/screen_bookstore_net.png)
 
 其他资源：
-服务端项目：（https://github.com/Fylan0/reading-service）
+
+服务端项目：https://github.com/Fylan0/reading-service
+
+
 ------------------------------
 
 # reading_flutter
