@@ -1,15 +1,12 @@
 # Reading APP Flutter版
 
-
-
-
 ------------------------------
+
 ## 开发过程记录
 
 ### 1、 使用 ：go_router、adaptive_navigation 搭建主页
 
 ![go_router、adaptive_navigation 搭建主页](/read_file/screen_1.png)
-
 
 ### 2、书店：书籍列表异步加载逻辑、GridView网格布局
 
@@ -31,7 +28,28 @@
 
 ![read.gif](/read_file/screen_reading.png)
 
+### 6、网络请求模块；书架页面使用接口数据；
+
+- http
+- provider
+- json_serializable、build_runner生成json代码
+
+json数据：
+
+[screen_bookstore_net_json.png](/read_file/screen_bookstore_net_json.png)
+
+服务端Mysql数据库内容
+![database_tb_book.png](/read_file/database_tb_book.png)
+
+APP书店页面截图：
+（服务端之前弄的假数据）
+
+![screen_bookstore_net.png](/read_file/screen_bookstore_net.png)
+
+其他资源：
+服务端项目：（https://github.com/Fylan0/reading-service）
 ------------------------------
+
 # reading_flutter
 
 A new Flutter project.
