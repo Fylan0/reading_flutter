@@ -29,7 +29,7 @@
 
 ### 5、阅读页面
 
-![read.gif](/read_file/read.gif)
+![read.gif](/read_file/screen_reading.png)
 
 ------------------------------
 # reading_flutter
