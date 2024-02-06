@@ -1,10 +1,13 @@
 import 'package:adaptive_navigation/adaptive_navigation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:reading_flutter/src/screens/bookshelf.dart';
 import 'package:reading_flutter/src/screens/bookstore.dart';
 import 'package:reading_flutter/src/screens/reading.dart';
 import 'package:reading_flutter/src/screens/test.dart';
+
+import '../generated/l10n.dart';
 
 /// 主页
 
@@ -21,6 +24,14 @@ class ReadingState extends State<Reading> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      localizationsDelegates: const [
+        S.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate
+      ],
+      supportedLocales: S.delegate.supportedLocales,
+      // locale: const Locale('en', 'US'), // 可以手动指定当前的语言
       routerConfig: GoRouter(
         initialLocation: bookstoreRouter,
         routes: [
@@ -89,9 +100,11 @@ class HomePage extends StatelessWidget {
             goRouter.go(testRouter);
           }
         },
-        destinations: const [
-          AdaptiveScaffoldDestination(title: "书店", icon: Icons.book),
-          AdaptiveScaffoldDestination(title: "书架", icon: Icons.mark_chat_read),
+        destinations: [
+          AdaptiveScaffoldDestination(
+              title: S.current.bookstore, icon: Icons.book),
+          AdaptiveScaffoldDestination(
+              title: S.current.bookshelf, icon: Icons.mark_chat_read),
           AdaptiveScaffoldDestination(
               title: "Test", icon: Icons.mark_chat_read),
         ],

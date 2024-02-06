@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 
+import '../../generated/l10n.dart';
 import '../data/bookEntity.dart';
 
 /// 书店页面
@@ -13,7 +14,6 @@ import '../data/bookEntity.dart';
 const bookstoreRouter = "/bookstore";
 
 class BookstoreScreen extends StatefulWidget {
-
   //测试方法
   Future<List<BookEntity>> fetchBookList() async {
     // 在这里实现异步逻辑，例如从网络请求数据
@@ -58,7 +58,7 @@ class _BookstoreState extends State<BookstoreScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Text("书店")),
+        appBar: AppBar(title: Text(S.current.bookstore)),
         body: FutureBuilder(
             // future: _bookListFuture,
             future: _getBooks(),

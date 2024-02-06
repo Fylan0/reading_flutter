@@ -30,6 +30,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
+  flutter_localizations:
+    sdk: flutter
+
   go_router: ^13.0.1
   adaptive_navigation: ^0.0.10
   uuid: ^4.3.3
@@ -56,6 +60,9 @@ dependencies:
 
 dev_dependencies:
   flutter_test:
+    sdk: flutter
+
+  flutter_localizations:
     sdk: flutter
 
   build_runner: ^2.2.1
@@ -110,3 +117,5 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+flutter_intl:
+  enabled: true

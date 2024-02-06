@@ -9,6 +9,7 @@ import 'package:reading_flutter/src/db/dao/bookChapterDao.dart';
 import 'package:reading_flutter/src/screens/reading.dart';
 import 'package:reading_flutter/src/utils/LocalPageLoaderUtil.dart';
 
+import '../../generated/l10n.dart';
 import '../data/bookChapter.dart';
 import '../data/bookEntity.dart';
 import '../db/dao/bookDap.dart';
@@ -81,7 +82,7 @@ class _BookshelfState extends State<BookshelfScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Text("书架"), actions: [
+        appBar: AppBar(title: Text(S.current.bookshelf), actions: [
           // 添加右侧的图标按钮
           IconButton(
             icon: const Icon(Icons.add),
