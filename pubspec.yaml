@@ -58,6 +58,11 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
 
+  #总的来说，plugin_platform_interface 提供了一种更高级别的抽象，使得插件的平台接口和实现可以更好地分离，从而提高了代码的可维护性和可测试性。
+  #而 MethodChannel 和 invokeMethod() 则是一种更底层的原生交互方式，适用于简单的原生交互场景。
+  #（目前项目中只需要简单调用原生代码，没必要抽离出独立的模块，所以在暂不使用。可参考flutter官方demo）
+#  plugin_platform_interface: ^2.1.8
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
